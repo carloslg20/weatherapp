@@ -61,7 +61,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/spacing_normal"
             android:padding="@dimen/spacing_normal"
-            android:text="Things to improved"
+            android:text="Things to improve"
             android:textAppearance="?android:textAppearanceMedium" />
 
         <android.support.v7.widget.CardView
