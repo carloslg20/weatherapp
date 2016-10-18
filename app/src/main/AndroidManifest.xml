@@ -12,6 +12,7 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".ui.HomeActivity"
+            android:launchMode="singleTop"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -38,11 +39,7 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.charlie.weatherapp.ui.HomeActivity" />
         </activity>
-        <activity android:name=".ui.Temporal" />
-        <activity
-            android:name=".ui.TemporalActivity"
-            android:label="@string/title_activity_temporal"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+
     </application>
 
 </manifest>

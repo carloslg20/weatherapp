@@ -38,7 +38,9 @@ public class HomeActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener,
         WeatherAdapter.WeatherClickListener {
 
-    public static final int REQUEST_CODE_VIEW_SHOT = 5407;
+    private static final String CURRENT_LAT = "9.9280690";
+    private static final String CURRENT_LONG = "-84.0907250";
+    private static final int CITY_COUNT = 15;
 
     private boolean twoPane;
     private boolean connected;
@@ -137,7 +139,7 @@ public class HomeActivity extends AppCompatActivity
     private void loadData() {
         showProgressBar(true);
         Call<CitiesFindResponse> service = ApiClient.getInstance()
-                .getCityListService("9.9280690", "-84.0907250", 15);
+                .getCityListService(CURRENT_LAT, CURRENT_LONG, CITY_COUNT);
 
         service.enqueue(new Callback<CitiesFindResponse>() {
             @Override

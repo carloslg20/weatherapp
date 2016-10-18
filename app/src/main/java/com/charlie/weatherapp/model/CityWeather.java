@@ -21,10 +21,15 @@ public class CityWeather implements Parcelable {
             return new CityWeather[size];
         }
     };
+    // City ID
     private int id;
+    // City name
     private String name;
+    //Weather condition codes
     private List<Weather> weather;
+    // Info related with the temperature
     private Main main;
+    // Wind speed, Wind direction
     private Wind wind;
 
     public CityWeather() {

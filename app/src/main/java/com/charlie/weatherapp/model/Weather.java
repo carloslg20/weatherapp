@@ -26,6 +26,7 @@ public class Weather implements Parcelable {
     private String main;
     //Weather condition within the group
     private String description;
+    //Weather icon id
     private String icon;
 
     public Weather() {
