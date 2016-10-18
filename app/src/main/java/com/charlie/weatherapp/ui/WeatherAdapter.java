@@ -22,14 +22,10 @@ import java.util.List;
 
 public class WeatherAdapter extends RecyclerView.Adapter<WeatherAdapter.WeatherHolder> {
 
-    private ArrayList<CityWeather> weatherArrayLis;
     private final LayoutInflater layoutInflater;
+    private ArrayList<CityWeather> weatherArrayLis;
     private WeatherClickListener listener;
     private Context context;
-
-    public interface WeatherClickListener {
-        void onWeatherClick(View view, CityWeather cityWeather);
-    }
 
     public WeatherAdapter(Context context, List<CityWeather> list, WeatherClickListener listener) {
         if (list != null) {
@@ -80,6 +76,10 @@ public class WeatherAdapter extends RecyclerView.Adapter<WeatherAdapter.WeatherH
             }
         });
         return holder;
+    }
+
+    public interface WeatherClickListener {
+        void onWeatherClick(View view, CityWeather cityWeather);
     }
 
     static class WeatherHolder extends RecyclerView.ViewHolder {

@@ -54,7 +54,7 @@ public class WeatherDetailFragment extends Fragment {
         TextView weatherDescription = (TextView) view.findViewById(R.id.weatherDescription);
         TextView cityName = (TextView) view.findViewById(R.id.cityName);
         cityName.setText(cityWeather.getName());
-        cityName.setVisibility(showCityName? View.VISIBLE: View.GONE);
+        cityName.setVisibility(showCityName ? View.VISIBLE : View.GONE);
         //binding
         if (cityWeather.getWeather() != null && !cityWeather.getWeather().isEmpty()) {
             //Use the first item

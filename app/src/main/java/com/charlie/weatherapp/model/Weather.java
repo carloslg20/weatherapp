@@ -9,14 +9,34 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Weather implements Parcelable {
 
+    public static final Parcelable.Creator<Weather> CREATOR = new Parcelable.Creator<Weather>() {
+        @Override
+        public Weather createFromParcel(Parcel source) {
+            return new Weather(source);
+        }
+
+        @Override
+        public Weather[] newArray(int size) {
+            return new Weather[size];
+        }
+    };
     //Weather condition id
     private int id;
     //Group of weather parameters (Rain, Snow, Extreme etc.)
     private String main;
     //Weather condition within the group
     private String description;
-
     private String icon;
+
+    public Weather() {
+    }
+
+    protected Weather(Parcel in) {
+        this.id = in.readInt();
+        this.main = in.readString();
+        this.description = in.readString();
+        this.icon = in.readString();
+    }
 
     public int getId() {
         return id;
@@ -66,26 +86,4 @@ public class Weather implements Parcelable {
         dest.writeString(this.description);
         dest.writeString(this.icon);
     }
-
-    public Weather() {
-    }
-
-    protected Weather(Parcel in) {
-        this.id = in.readInt();
-        this.main = in.readString();
-        this.description = in.readString();
-        this.icon = in.readString();
-    }
-
-    public static final Parcelable.Creator<Weather> CREATOR = new Parcelable.Creator<Weather>() {
-        @Override
-        public Weather createFromParcel(Parcel source) {
-            return new Weather(source);
-        }
-
-        @Override
-        public Weather[] newArray(int size) {
-            return new Weather[size];
-        }
-    };
 }

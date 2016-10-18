@@ -21,10 +21,6 @@ public class ApiClient {
 
     private final Retrofit retrofit;
 
-    public static ApiClient getInstance() {
-        return sInstance;
-    }
-
     private ApiClient() {
         HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
         logging.setLevel(HttpLoggingInterceptor.Level.BODY);
@@ -50,22 +46,27 @@ public class ApiClient {
                 return chain.proceed(request);
             }
         });
-       retrofit = new Retrofit.Builder()
+        retrofit = new Retrofit.Builder()
                 .baseUrl(ApiConstant.BASE_URL)
                 .addConverterFactory(JacksonConverterFactory.create())
                 .client(httpClient.build())
                 .build();
     }
 
+    public static ApiClient getInstance() {
+        return sInstance;
+    }
+
     /**
-     *  Returns a service for getting data from cities laid within definite circle that is specified
-     *  by center point ('lat', 'lon') and expected number of cities ('cnt') around this point.
-     * @param lat City geo location, latitude
-     * @param lon City geo location, longitude
+     * Returns a service for getting data from cities laid within definite circle that is specified
+     * by center point ('lat', 'lon') and expected number of cities ('cnt') around this point.
+     *
+     * @param lat     City geo location, latitude
+     * @param lon     City geo location, longitude
      * @param counter number of cities around the point that should be returned
      */
     public Call<CitiesFindResponse> getCityListService(String lat, String lon, int counter) {
         FindService service = retrofit.create(FindService.class);
-        return service.listCities(lat,lon,counter);
+        return service.listCities(lat, lon, counter);
     }
 }

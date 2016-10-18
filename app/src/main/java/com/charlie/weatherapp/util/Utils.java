@@ -11,7 +11,7 @@ public class Utils {
         if (TextUtils.isEmpty(value)) {
             return value;
         } else {
-           return value.substring(0, 1).toUpperCase() + value.substring(1);
+            return value.substring(0, 1).toUpperCase() + value.substring(1);
         }
     }
 
