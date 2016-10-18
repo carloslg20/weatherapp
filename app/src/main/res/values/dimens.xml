@@ -7,7 +7,6 @@
     <dimen name="activity_vertical_margin">16dp</dimen>
 
     <dimen name="app_bar_height">200dp</dimen>
-    <dimen name="item_width">200dp</dimen>
 
     <!-- standard metrics -->
     <dimen name="spacing_normal">8dp</dimen>

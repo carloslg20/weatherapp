@@ -3,7 +3,6 @@ package com.charlie.weatherapp.api;
 import com.charlie.weatherapp.model.CitiesFindResponse;
 
 import java.io.IOException;
-import java.util.logging.Level;
 
 import okhttp3.HttpUrl;
 import okhttp3.Interceptor;
@@ -18,9 +17,9 @@ import retrofit2.converter.jackson.JacksonConverterFactory;
 
 public class ApiClient {
 
-    private static ApiClient sInstance = new ApiClient();
+    private static final ApiClient sInstance = new ApiClient();
 
-    private Retrofit retrofit;
+    private final Retrofit retrofit;
 
     public static ApiClient getInstance() {
         return sInstance;

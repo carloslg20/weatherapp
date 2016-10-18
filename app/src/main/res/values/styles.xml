@@ -17,5 +17,6 @@
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
-    <style name="CardStyle"></style>
+    <style name="CardStyle" />
+
 </resources>

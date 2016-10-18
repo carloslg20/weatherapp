@@ -5,17 +5,16 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context="com.charlie.weatherapp.ui.HomeActivity">
+    tools:context="com.charlie.weatherapp.ui.AboutActivity">
 
     <include layout="@layout/include_toolbar" />
 
-    <FrameLayout
+    <fragment
+        android:id="@+id/fragment"
+        android:name="com.charlie.weatherapp.ui.AboutActivityFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior">
-
-        <include layout="@layout/content_home" />
-
-    </FrameLayout>
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        tools:layout="@layout/fragment_about" />
 
 </android.support.design.widget.CoordinatorLayout>

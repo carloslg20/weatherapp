@@ -1,6 +1,7 @@
 package com.charlie.weatherapp.util;
 
 
+import android.content.Context;
 import android.os.Build;
 import android.text.TextUtils;
 
@@ -20,6 +21,10 @@ public class Utils {
 
     public static boolean hasLollipop() {
         return Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP;
+    }
+
+    public static boolean isTablet(Context context) {
+        return context.getResources().getConfiguration().smallestScreenWidthDp >= 600;
     }
 
 }

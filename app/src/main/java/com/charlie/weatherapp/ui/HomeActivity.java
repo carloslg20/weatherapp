@@ -2,11 +2,13 @@ package com.charlie.weatherapp.ui;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.graphics.drawable.AnimatedVectorDrawableCompat;
+import android.support.v4.app.Fragment;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -20,6 +22,7 @@ import android.view.View;
 import android.view.ViewStub;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import com.charlie.weatherapp.R;
 import com.charlie.weatherapp.api.ApiClient;
@@ -41,15 +44,17 @@ public class HomeActivity extends AppCompatActivity
     private boolean connected;
     private ProgressBar loading;
     private ImageView noConnection;
-    private Toolbar toolbar;
 
     private WeatherAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (getResources().getBoolean(R.bool.force_landscape)) {
+            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+        }
         setContentView(R.layout.activity_home);
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -94,29 +99,21 @@ public class HomeActivity extends AppCompatActivity
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+            Toast.makeText(this, getString(R.string.setting_message), Toast.LENGTH_LONG).show();
             return true;
         }
-
         return super.onOptionsItemSelected(item);
     }
 
-    @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
-        // Handle navigation view item clicks here.
         int id = item.getItemId();
-
         if (id == R.id.nav_cities) {
-            // Handle the camera action
+            // Do nothing, we are always here for this example app
         } else if (id == R.id.nav_about) {
-
+            startActivity(AboutActivity.getIntent(this));
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -126,17 +123,16 @@ public class HomeActivity extends AppCompatActivity
 
     @Override
     public void onWeatherClick(View view, CityWeather cityWeather) {
-        Intent intent = WeatherDetailActivity.newIntent(this, cityWeather);
-//        if (Utils.hasLollipop()) {
-//            ActivityOptions options =
-//                    ActivityOptions.makeSceneTransitionAnimation(this,
-//                            Pair.create(view, getString(R.string.transition_shot)),
-//                            Pair.create(view, getString(R.string.transition_shot_background)));
-//            startActivityForResult(intent, REQUEST_CODE_VIEW_SHOT, options.toBundle());
-//        } else {
-//            startActivity(intent);
-//        }
-        startActivity(intent);
+        if (twoPane) {
+            Fragment fragment = WeatherDetailFragment.getInstance(cityWeather, true);
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.detailContainer, fragment, WeatherDetailFragment.TAG)
+                    .commit();
+        } else {
+            Intent intent = WeatherDetailActivity.newIntent(this, cityWeather);
+            startActivity(intent);
+        }
+
     }
 
     private void loadData() {
@@ -152,14 +148,14 @@ public class HomeActivity extends AppCompatActivity
                 if (response.isSuccessful()) {
                     adapter.setDataSet(response.body().getList());
                 } else {
-                    // TODO: show message erro
+                    Toast.makeText(HomeActivity.this, "Open Weather error...", Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
             public void onFailure(Call<CitiesFindResponse> call, Throwable t) {
                 showProgressBar(false);
-                // TODO: show message error
+                Toast.makeText(HomeActivity.this, "Open Weather error...", Toast.LENGTH_SHORT).show();
                 Log.getStackTraceString(t);
             }
         });

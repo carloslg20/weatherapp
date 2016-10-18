@@ -32,7 +32,7 @@ public class WeatherDetailActivity extends AppCompatActivity {
             Intent intent = getIntent();
             CityWeather cityWeather = intent.getParcelableExtra(EXTRA_CITY_WEATHER);
             getSupportActionBar().setTitle(cityWeather.getName());
-            Fragment fragment = WeatherDetailFragment.getInstance(cityWeather);
+            Fragment fragment = WeatherDetailFragment.getInstance(cityWeather, false);
             getSupportFragmentManager().beginTransaction()
                     .replace(R.id.root_container, fragment, WeatherDetailFragment.TAG)
                     .commit();

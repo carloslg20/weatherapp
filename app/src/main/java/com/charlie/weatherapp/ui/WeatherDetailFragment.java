@@ -24,16 +24,13 @@ public class WeatherDetailFragment extends Fragment {
 
     public static final String TAG = "WeatherDetailFragment";
     private static final String EXTRA_CITY_WEATHER = "cityWeather";
+    private static final String EXTRA_CITY_NAME = "cityName";
 
-    private ImageView weatherIcon;
-    private TextView cityTemperature;
-    private TextView cityHumidity;
-    private TextView cityWindSpeed;
-    private TextView weatherDescription;
 
-    public static Fragment getInstance(CityWeather cityWeather) {
+    public static Fragment getInstance(CityWeather cityWeather, boolean showCityName) {
         Bundle arguments = new Bundle();
         arguments.putParcelable(EXTRA_CITY_WEATHER, cityWeather);
+        arguments.putBoolean(EXTRA_CITY_NAME, showCityName);
         Fragment fragment = new WeatherDetailFragment();
         fragment.setArguments(arguments);
         return fragment;
@@ -45,15 +42,19 @@ public class WeatherDetailFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_weather_detail, container, false);
         CityWeather cityWeather = getArguments().getParcelable(EXTRA_CITY_WEATHER);
+        boolean showCityName = getArguments().getBoolean(EXTRA_CITY_NAME);
+
         NumberFormat formatter = new DecimalFormat("##");
         NumberFormat formatterWind = new DecimalFormat("##.##");
 
-        weatherIcon = (ImageView) view.findViewById(R.id.weatherIcon);
-        cityTemperature = (TextView) view.findViewById(R.id.cityTemperature);
-        cityHumidity = (TextView) view.findViewById(R.id.cityHumidity);
-        cityWindSpeed = (TextView) view.findViewById(R.id.cityWindSpeed);
-        weatherDescription = (TextView) view.findViewById(R.id.weatherDescription);
-
+        ImageView weatherIcon = (ImageView) view.findViewById(R.id.weatherIcon);
+        TextView cityTemperature = (TextView) view.findViewById(R.id.cityTemperature);
+        TextView cityHumidity = (TextView) view.findViewById(R.id.cityHumidity);
+        TextView cityWindSpeed = (TextView) view.findViewById(R.id.cityWindSpeed);
+        TextView weatherDescription = (TextView) view.findViewById(R.id.weatherDescription);
+        TextView cityName = (TextView) view.findViewById(R.id.cityName);
+        cityName.setText(cityWeather.getName());
+        cityName.setVisibility(showCityName? View.VISIBLE: View.GONE);
         //binding
         if (cityWeather.getWeather() != null && !cityWeather.getWeather().isEmpty()) {
             //Use the first item

@@ -29,6 +29,20 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.charlie.weatherapp.ui.HomeActivity" />
         </activity>
+        <activity
+            android:name=".ui.AboutActivity"
+            android:label="@string/title_activity_about"
+            android:parentActivityName=".ui.HomeActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.charlie.weatherapp.ui.HomeActivity" />
+        </activity>
+        <activity android:name=".ui.Temporal" />
+        <activity
+            android:name=".ui.TemporalActivity"
+            android:label="@string/title_activity_temporal"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

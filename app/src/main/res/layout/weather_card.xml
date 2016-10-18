@@ -39,8 +39,7 @@
                     android:layout_width="42dp"
                     android:layout_height="42dp"
                     android:layout_marginRight="@dimen/padding_normal"
-                    android:contentDescription="@string/weather_condition"
-                    tools:src="@drawable/test_icon" />
+                    android:contentDescription="@string/weather_condition" />
 
                 <TextView
                     android:id="@+id/weatherDescription"
